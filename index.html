@@ -7,40 +7,5 @@
 	</head>
 
 	<body>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.js"></script>
-		<script>
-
-			function getCSV(file, callback){
-				var xhttp=new XMLHttpRequest();
-
-				xhttp.onreadystatechange = function(){
-					if(this.readyState == 4 && this.status == 200){
-						data = Papa.parse(this.responseText).data;
-						callback(data);
-					}
-				};
-
-				xhttp.open("GET", file, true);
-				xhttp.send();
-			}
-
-			function redirect(data){
-				var currentURL = window.location.href.split('go.param.me/')[1];
-
-				for(var i = 1; i < data.length - 1; i++){
-					shortURL = data[i][0];
-					longURL = data[i][1];
-
-					if(currentURL.includes(shortURL)){
-						window.location = longURL;
-					} else {
-						window.location = "https://www.param.me";
-					}
-				}
-			}
-
-			getCSV("https://raw.githubusercontent.com/paramt/go.param.me/master/redirects.csv", redirect)
-
-		</script>
 	</body>
 </html>
