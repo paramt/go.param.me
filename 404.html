@@ -39,7 +39,9 @@ permalink: /404.html
 					}
 				}
 
-				window.location = "https://www.param.me";
+				if !data.includes(currentURL){
+					window.location = "https://www.param.me";
+				}
 			}
 
 			getCSV("https://raw.githubusercontent.com/paramt/go.param.me/master/redirects.csv", redirect)
