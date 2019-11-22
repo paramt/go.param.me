@@ -34,13 +34,10 @@ permalink: /404.html
 					shortURL = data[i][0];
 					longURL = data[i][1];
 
-					console.log(shortURL);
-					console.log(currentURL);
-
 					if(currentURL.includes(shortURL)){
 						window.location = longURL;
 					} else {
-						// window.location = "https://www.param.me";
+						window.location = "https://www.param.me";
 					}
 				}
 			}
