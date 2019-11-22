@@ -36,10 +36,10 @@ permalink: /404.html
 
 					if(currentURL.includes(shortURL)){
 						window.location = longURL;
-					} else {
-						window.location = "https://www.param.me";
 					}
 				}
+
+				window.location = "https://www.param.me";
 			}
 
 			getCSV("https://raw.githubusercontent.com/paramt/go.param.me/master/redirects.csv", redirect)
