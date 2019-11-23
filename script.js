@@ -1,5 +1,5 @@
 function getCSV(file, callback){
-  var xhttp=new XMLHttpRequest();
+  var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
@@ -13,7 +13,7 @@ function getCSV(file, callback){
 }
 
 function redirect(data){
-  var currentURL = window.location.href.split('go.param.me/')[1];
+  var currentURL = window.location.href.split("go.param.me/")[1];
   var redirectURL = "";
 
   for(var i = 1; i < data.length - 1; i++){
