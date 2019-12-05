@@ -20,7 +20,7 @@ function redirect(data){
     shortURL = data[i][0];
     longURL = data[i][1];
 
-    if(currentURL.includes(shortURL)){
+    if(currentURL == shortURL){
       redirectURL = longURL;
       console.log("Setting redirect URL to " + longURL);
     }
