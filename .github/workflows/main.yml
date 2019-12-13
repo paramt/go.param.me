@@ -12,7 +12,9 @@ jobs:
     - uses: actions/checkout@v1
       
     - name: Create local changes
-      run: python add_url.py
+      run: |
+        pip install pygithub
+        python add_url.py
 
     - name: Commit files
       run: |
