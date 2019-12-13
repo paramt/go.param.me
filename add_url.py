@@ -1,6 +1,8 @@
 import os
 from github import Github
 
+print(os.environ["GITHUB_ACTIONS"])
+
 github = Github(os.environ["GITHUB_TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
 open_issues = repo.get_issues(state="open")
