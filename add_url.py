@@ -3,7 +3,7 @@ from github import Github
 
 print(os.environ["GITHUB_ACTIONS"])
 
-github = Github(os.environ["GITHUB_TOKEN"])
+github = Github(os.environ["TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
 open_issues = repo.get_issues(state="open")
 
