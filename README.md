@@ -10,3 +10,6 @@ In order to add more links, I can update [redirects.csv](redirects.csv). However
 - The issue is created by me
 
 If the criteria is met, it adds the short URL and long URL pair specified in the body to the [redirects.csv](redirects.csv)
+
+## License
+The repo is licensed under the [MIT License](LICENSE), so you may use and modify the code in any way as long as the copyright and license notices are kept.  
