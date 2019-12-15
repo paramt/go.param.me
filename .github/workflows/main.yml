@@ -1,8 +1,8 @@
 name: Add Short URL
 
 on: 
-  issue_comment:
-    types: [created]
+  issues:
+    types: [opened]
 
 jobs:
   build:
