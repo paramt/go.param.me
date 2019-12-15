@@ -14,5 +14,5 @@ for issue in open_issues:
 			csv.write(line)
 			csv.write("\n")
 
-		issue.create_comment("The redirect has been added! Please allow up to 5 minutes for the changes to take place.")
+		issue.create_comment("The redirect has been added!")
 		issue.edit(state="closed")
