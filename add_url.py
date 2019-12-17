@@ -17,6 +17,8 @@ if issue.title == "Add URL" and issue.user.login == "paramt":
 	issue.edit(state="closed")
 
 if issue.title == "Remove URL" and issue.user.login == "paramt":
+	removed = False
+
 	with open("redirects.csv", "r") as csv:
 		lines = csv.readlines()
 
@@ -24,6 +26,11 @@ if issue.title == "Remove URL" and issue.user.login == "paramt":
 		for line in csv:
 			if line.split(",")[0] != issue.body:
 				csv.write(line)
+			else:
+				removed = True
 
-	issue.create_comment("The redirect has been removed!")
+	if removed:
+		issue.create_comment(f"The redirect `go.param.me/{issue.body}` has been removed!")
+	else:
+		issue.create_comment(f"The redirect `go.param.me/{issue.body}` doesn't exist!")
 	issue.edit(state="closed")
