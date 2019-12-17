@@ -1,6 +1,6 @@
 name: Add Short URL
 
-on: 
+on:
   issues:
     types: [opened]
 
@@ -10,21 +10,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      
+
     - name: Install dependencies
       run: pip install pygithub
-      
+
     - name: Create local changes
       run: python add_url.py
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Add URL" -a
-    
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
