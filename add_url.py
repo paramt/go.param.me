@@ -5,7 +5,7 @@ print(os.environ["GITHUB_ACTIONS"])
 
 github = Github(os.environ["TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
-issue = repo.get_issue(number=os.environ["ISSUE"])
+issue = repo.get_issue(number=int(os.environ["ISSUE"]))
 
 if issue.title == "Add URL" and issue.user.login == "paramt":
 	with open("redirects.csv", "a") as csv:
