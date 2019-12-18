@@ -18,7 +18,7 @@ jobs:
       run: pip install pygithub
 
     - name: Create local changes
-      run: python add_url.py
+      run: python update_redirects.py
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ISSUE: ${{ github.event.issue.number }}
