@@ -23,7 +23,7 @@ if issue.title == "Remove URL" and issue.user.login == "paramt":
 		lines = csv.readlines()
 
 	with open("redirects.csv", "w") as csv:
-		for line in csv:
+		for line in lines:
 			if line.split(",")[0] != issue.body:
 				csv.write(line)
 			else:
