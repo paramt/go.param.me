@@ -2,7 +2,7 @@
 name: Remove URL
 about: Remove a link from redirects.csv
 title: Remove URL
-labels: ''
+labels: 'update redirects'
 assignees: ''
 
 ---
