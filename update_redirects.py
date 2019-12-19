@@ -6,8 +6,6 @@ The script is triggered by this GitHub Action: /.github/workflows/main.yml
 import os
 from github import Github
 
-print(os.environ["GITHUB_ACTIONS"])
-
 # Get the issue that triggered the script
 github = Github(os.environ["TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
