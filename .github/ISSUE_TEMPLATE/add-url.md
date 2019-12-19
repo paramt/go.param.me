@@ -1,7 +1,7 @@
 ---
 name: Add URL
 about: Add a link to redirects.csv
-title: ''
+title: Add URL
 labels: ''
 assignees: ''
 
