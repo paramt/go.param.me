@@ -13,6 +13,9 @@ repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
 issue = repo.get_issue(number=int(os.environ["ISSUE"]))
 
 if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redirects":
+	os.system("git config --local user.email 'action@github.com'")
+	os.system("git config --local user.name 'GitHub Action'")
+
 	if issue.title == "Add URL":
 		short = issue.body.split(" --> ")[0]
 		long = issue.body.split(" --> ")[1]
@@ -33,6 +36,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 
 		issue.create_comment("The redirect has been added!")
 		issue.edit(state="closed")
+		os.system(f"git commit -m 'Add redirect: {short}' -a")
 
 	if issue.title == "Remove URL":
 		removed = False
@@ -49,6 +53,8 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 
 		if removed:
 			issue.create_comment(f"The redirect `go.param.me/{issue.body}` has been removed!")
+			os.system(f"git commit -m 'Remove redirect: {issue.body}' -a")
 		else:
 			issue.create_comment(f"The redirect `go.param.me/{issue.body}` doesn't exist!")
+
 		issue.edit(state="closed")
