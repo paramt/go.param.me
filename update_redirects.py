@@ -22,7 +22,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 			lines = csv.readlines()
 			for line in lines:
 				if line.split(",")[0] == short:
-					issue.create_comment(f"The redirect go.param.me/`{short}` already exists!")
+					issue.create_comment(f"The redirect `go.param.me/`{short}` already exists!")
 					issue.edit(state="closed")
 					sys.exit()
 
