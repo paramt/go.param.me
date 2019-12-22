@@ -12,6 +12,11 @@ github = Github(os.environ["TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
 issue = repo.get_issue(number=int(os.environ["ISSUE"]))
 
+def clean_exit(comment):
+	issue.create_comment(comment)
+	issue.edit(state="closed")
+	sys.exit()
+
 if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redirects":
 	os.system("git config --local user.email 'action@github.com'")
 	os.system("git config --local user.name 'GitHub Action'")
@@ -25,18 +30,15 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 			lines = csv.readlines()
 			for line in lines:
 				if line.split(",")[0] == short:
-					issue.create_comment(f"The redirect `go.param.me/`{short}` already exists!")
-					issue.edit(state="closed")
-					sys.exit()
+					clean_exit(f"The redirect `go.param.me/`{short}` already exists!")
 
 		# Add the short,long URL pair to redirects.csv
 		with open("redirects.csv", "a") as csv:
 			csv.write(f"{short},{long}")
 			csv.write("\n")
 
-		issue.create_comment("The redirect has been added!")
-		issue.edit(state="closed")
 		os.system(f"git commit -m 'Add redirect: {short}' -m '#{os.environ['ISSUE']}' -a")
+		clean_exit("The redirect has been added!")
 
 	if issue.title == "Remove URL":
 		removed = False
@@ -52,9 +54,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 					removed = True
 
 		if removed:
-			issue.create_comment(f"The redirect `go.param.me/{issue.body}` has been removed!")
 			os.system(f"git commit -m 'Remove redirect: {issue.body}' -m '#{os.environ['ISSUE']}' -a")
+			clean_exit(f"The redirect `go.param.me/{issue.body}` has been removed!")
 		else:
-			issue.create_comment(f"The redirect `go.param.me/{issue.body}` doesn't exist!")
-
-		issue.edit(state="closed")
+			clean_exit(f"The redirect `go.param.me/{issue.body}` doesn't exist!")
