@@ -46,7 +46,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 
 		with open("redirects.csv", "w") as csv:
 			for line in lines:
-				if line.split(",")[0] != issue.body:
+				if line.split(",")[0] != issue.body.strip():
 					csv.write(line)
 				else:
 					removed = True
