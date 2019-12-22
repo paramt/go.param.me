@@ -22,8 +22,11 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 	os.system("git config --local user.name 'GitHub Action'")
 
 	if issue.title == "Add URL":
-		short = issue.body.split("-->")[0].strip()
-		long = issue.body.split("-->")[1].strip()
+		try:
+			short = issue.body.split("-->")[0].strip()
+			long = issue.body.split("-->")[1].strip()
+		except IndexError:
+			clean_exit("Invalid syntax! Use \n ```\nShort URL --> Long URL\n```")
 
 		# Make sure the short URL isn't already in use
 		with open("redirects.csv", "r") as csv:
