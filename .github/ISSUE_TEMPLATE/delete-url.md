@@ -1,5 +1,5 @@
 ---
-name: Remove URL
+name: Delete URL
 about: Remove a link from redirects.csv
 title: Remove URL
 labels: update redirects
