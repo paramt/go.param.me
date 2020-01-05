@@ -13,6 +13,7 @@ function getCSV(file, callback){
 }
 
 function redirect(data){
+  utm = "?utm_source=go.param.me&utm_campaign=redirect";
   var currentURL = window.location.pathname.substr(1);
   var redirectURL = "";
 
@@ -22,17 +23,18 @@ function redirect(data){
 
     if(currentURL == shortURL){
       redirectURL = longURL;
-      console.log("Setting redirect URL to " + longURL);
+	  console.log("Setting redirect URL to " + longURL);
+	  utm += "&utm_medium=short-url";
     }
   }
 
   if(redirectURL === ""){
     redirectURL = "https://www.param.me";
-    console.log("Invalid URL! Defaulting redirect URL to param.me");
+	console.log("Invalid URL! Defaulting redirect URL to param.me");
+	utm += "&utm_medium=catch-all";
   }
 
   console.log("Redirecting");
-  utm = "?utm_source=go.param.me&utm_campaign=redirect&utm_medium=short-url"
   window.location = redirectURL + utm;
 }
 
