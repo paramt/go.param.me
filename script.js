@@ -13,7 +13,7 @@ function getCSV(file, callback){
 }
 
 function redirect(data){
-  var currentURL = window.location.pathname;
+  var currentURL = window.location.pathname.substr(1);
   var redirectURL = "";
 
   for(var i = 1; i < data.length - 1; i++){
