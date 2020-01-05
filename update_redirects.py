@@ -47,6 +47,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 		clean_exit("The redirect has been added!")
 
 	if issue.title == "Remove URL":
+		body = issue.body.split("\n")[0].strip()
 		removed = False
 
 		with open("redirects.csv", "r") as csv:
@@ -54,7 +55,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 
 		with open("redirects.csv", "w") as csv:
 			for line in lines:
-				if line.split(",")[0] != issue.body.strip():
+				if line.split(",")[0] != body:
 					csv.write(line)
 				else:
 					removed = True
