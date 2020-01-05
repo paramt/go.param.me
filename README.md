@@ -24,5 +24,5 @@ If you'd like to create your own URL shortener, you can fork this repo but you'l
 - [script.js](script.js) - change the values for `redirectURL`, `utm`, and the first parameter for `getCSV()`
 - [update_redirects.py](update_redirects.py) - change the parameters to `clean_exit()` (called 3 times)
 
-## :license: License
+## License
 The repo is licensed under the [MIT License](LICENSE), so you may use and modify the code in any way as long as the copyright and license notices are kept.  
