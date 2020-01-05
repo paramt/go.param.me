@@ -23,18 +23,15 @@ function redirect(data){
 
 		if(currentURL == shortURL){
 			redirectURL = longURL;
-			console.log("Setting redirect URL to " + longURL);
 			utm += "&utm_medium=short-url";
 		}
 	}
 
 	if(redirectURL === ""){
 		redirectURL = "https://www.param.me";
-		console.log("Invalid URL! Defaulting redirect URL to param.me");
 		utm += "&utm_medium=catch-all";
 	}
 
-	console.log("Redirecting");
 	window.location = redirectURL + utm;
 }
 
