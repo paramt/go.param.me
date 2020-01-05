@@ -13,7 +13,7 @@ function getCSV(file, callback){
 }
 
 function redirect(data){
-	utm = "?utm_source=go.param.me&utm_campaign=redirect";
+	utm = "utm_source=go.param.me&utm_campaign=redirect";
 	var currentURL = window.location.pathname.substr(1);
 	var redirectURL = "";
 
@@ -32,7 +32,11 @@ function redirect(data){
 		utm += "&utm_medium=catch-all";
 	}
 
-	window.location = redirectURL + utm;
+	if(redirectURL.includes("?")){
+		window.location = redirectURL + "&" + utm;
+	} else {
+		window.location = redirectURL + "?" + utm;
+	}
 }
 
 getCSV("https://raw.githubusercontent.com/paramt/go.param.me/master/redirects.csv", redirect)
