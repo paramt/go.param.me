@@ -61,7 +61,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 					removed = True
 
 		if removed:
-			os.system(f"git commit -m 'Remove redirect: {issue.body}' -m '#{os.environ['ISSUE']}' -a")
-			clean_exit(f"The redirect `go.param.me/{issue.body}` has been removed!")
+			os.system(f"git commit -m 'Remove redirect: {body}' -m '#{os.environ['ISSUE']}' -a")
+			clean_exit(f"The redirect `go.param.me/{body}` has been removed!")
 		else:
-			clean_exit(f"The redirect `go.param.me/{issue.body}` doesn't exist!")
+			clean_exit(f"The redirect `go.param.me/{body}` doesn't exist!")
