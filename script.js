@@ -32,7 +32,8 @@ function redirect(data){
   }
 
   console.log("Redirecting");
-  window.location = redirectURL;
+  utm = "?utm_source=go.param.me&utm_campaign=redirect&utm_medium=short-url"
+  window.location = redirectURL + utm;
 }
 
 getCSV("https://raw.githubusercontent.com/paramt/go.param.me/master/redirects.csv", redirect)
