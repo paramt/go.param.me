@@ -19,7 +19,7 @@ def clean_exit(comment):
 
 if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redirects":
 	os.system("git config --local user.email 'action@github.com'")
-	os.system("git config --local user.name 'GitHub Action'")
+	os.system("git config --local user.name 'GitHub Actions'")
 
 	if issue.title == "Add URL":
 		# Use the first line of the issue body
