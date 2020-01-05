@@ -22,9 +22,12 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 	os.system("git config --local user.name 'GitHub Action'")
 
 	if issue.title == "Add URL":
+		# Use the first line of the issue body
+		body = issue.body.split("\n")[0]
+
 		try:
-			short = issue.body.split("-->")[0].strip()
-			long = issue.body.split("-->")[1].strip()
+			short = body.split("-->")[0].strip()
+			long = body.split("-->")[1].strip()
 		except IndexError:
 			clean_exit("Invalid syntax! Use \n ```\nShort URL --> Long URL\n```")
 
