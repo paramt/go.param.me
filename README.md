@@ -17,5 +17,12 @@ Short URL --> Long URL
 ### Remove URL
 In order to remove a redirect, the issue must be created by me, be titled "Remove URL", and have the <kbd>update redirects</kbd> label. The issue body should contain the short URL to remove.
 
-## License
+## Modify 
+If you'd like to create your own URL shortener, you can fork this repo but you'll need to change a few things:
+- [CNAME](CNAME) - from `go.param.me` to your own short domain
+- [index.html](index.html) - change the meta redirect if someone goes to the index
+- [script.js](script.js) - change the values for `redirectURL`, `utm`, and the first parameter for `getCSV()`
+- [update_redirects.py](update_redirects.py) - change the parameters to `clean_exit()` (called 3 times)
+
+## :license: License
 The repo is licensed under the [MIT License](LICENSE), so you may use and modify the code in any way as long as the copyright and license notices are kept.  
