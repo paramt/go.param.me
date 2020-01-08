@@ -3,9 +3,20 @@ This script runs each time a new issue is created in the repo.
 The script is triggered by this GitHub Action: /.github/workflows/main.yml
 '''
 
+import json
 import os
 import sys
 from github import Github
+
+# Set config variables from config.js
+with open("config.js", "r") as js:
+	config = js.read()[13:]
+	config = json.loads(config)
+	SHORT_DOMAIN = config["shortDomain"] # To construct issue comments
+	GH_USER = config["user"] # To filter new issues
+
+print(SHORT_DOMAIN)
+print(GH_USER)
 
 # Get the issue that triggered the script
 github = Github(os.environ["TOKEN"])
@@ -17,7 +28,7 @@ def clean_exit(comment):
 	issue.edit(state="closed")
 	sys.exit()
 
-if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redirects":
+if issue.user.login == GH_USER and issue.get_labels()[0].name == "update redirects":
 	os.system("git config --local user.email 'action@github.com'")
 	os.system("git config --local user.name 'GitHub Actions'")
 
@@ -36,7 +47,7 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 			lines = csv.readlines()
 			for line in lines:
 				if line.split(",")[0] == short:
-					clean_exit(f"The redirect `go.param.me/`{short}` already exists!")
+					clean_exit(f"The redirect `{SHORT_DOMAIN}/`{short}` already exists!")
 
 		# Add the short,long URL pair to redirects.csv
 		with open("redirects.csv", "a") as csv:
@@ -62,6 +73,6 @@ if issue.user.login == "paramt" and issue.get_labels()[0].name == "update redire
 
 		if removed:
 			os.system(f"git commit -m 'Remove redirect: {body}' -m '#{os.environ['ISSUE']}' -a")
-			clean_exit(f"The redirect `go.param.me/{body}` has been removed!")
+			clean_exit(f"The redirect `{SHORT_DOMAIN}/{body}` has been removed!")
 		else:
-			clean_exit(f"The redirect `go.param.me/{body}` doesn't exist!")
+			clean_exit(f"The redirect `{SHORT_DOMAIN}/{body}` doesn't exist!")
