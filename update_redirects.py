@@ -15,14 +15,12 @@ with open("config.js", "r") as js:
 	SHORT_DOMAIN = config["shortDomain"] # To construct issue comments
 	GH_USER = config["user"] # To filter new issues
 
-print(SHORT_DOMAIN)
-print(GH_USER)
-
 # Get the issue that triggered the script
 github = Github(os.environ["TOKEN"])
 repo = github.get_repo(os.environ["GITHUB_REPOSITORY"])
 issue = repo.get_issue(number=int(os.environ["ISSUE"]))
 
+# Close and comment on issue, then exit script
 def clean_exit(comment):
 	issue.create_comment(comment)
 	issue.edit(state="closed")
