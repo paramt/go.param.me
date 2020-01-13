@@ -18,7 +18,7 @@ Short URL --> Long URL
 In order to remove a redirect, the issue must be created by the user specified in `config.js`, be titled "Remove URL", and have the <kbd>update redirects</kbd> label. The issue body should contain the short URL to remove.
 
 ## Modify
-If you'd like to create your own URL shortener, fork this repo, modify [config.js](config.js), the meta redirect in [index.html](index.html), and the domain name in [CNAME](CNAME). Remember to delete the existing redirects too!
+If you'd like to create your own URL shortener, fork this repo, modify [config.js](config.js), the meta redirect in [index.html](https://github.com/paramt/go.param.me/blob/master/index.html#L6), and the domain name in [CNAME](CNAME). Remember to delete the existing redirects too!
 
 ### `config.js`
 | Option | Description | Type | Example |
