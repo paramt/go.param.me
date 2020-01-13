@@ -2,7 +2,7 @@
 > A URL shortener for my personal links.
 
 ## Redirects
-All the redirect URLs are maintained in [`redirects.csv`](redirects.csv), which is fetched by the [client-side JavaScript](script.js) each time someone visits the site. There is no dynamic content as everything is done by the client-side. Alternatively, and if Netlify is set up, then a `_redirects` file can be used to create server-side redirects which improve SEO and are faster.
+All the redirect URLs are maintained in [`redirects.csv`](redirects.csv), which is fetched by the client [`script.js`](script.js) each time someone visits the site. There is no dynamic content as everything is done by the client-side. Alternatively, and if Netlify is set up, then a `_redirects` file can be used to create server-side redirects which improve SEO and are faster.
 
 ## Usage
 Redirects can be added or removed by opening a new issue on GitHub. Creating a new issue runs [`update_redirects.py`](update_redirects.py), which modifies `redirects.csv` and `_redirects`.
