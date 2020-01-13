@@ -14,6 +14,7 @@ with open("config.js", "r") as js:
 	config = json.loads(config)
 	SHORT_DOMAIN = config["shortDomain"] # To construct issue comments
 	GH_USER = config["user"] # To filter new issues
+	NETLIFY = config["netlify_redirects"]
 
 # Get the issue that triggered the script
 github = Github(os.environ["TOKEN"])
@@ -25,6 +26,21 @@ def clean_exit(comment):
 	issue.create_comment(comment)
 	issue.edit(state="closed")
 	sys.exit()
+
+def add_netlify_redirects(short, long):
+	with open("_redirects", "a") as redirects:
+		redirects.write(f"/{short} {long}")
+		redirects.write("\n")
+
+def remove_netlify_redirects(url):
+	with open("_redirects", "r") as redirects:
+		lines = redirects.readlines()
+
+	with open("_redirects", "w") as redirects:
+		# Empty file and write each line again except for the line to remove
+		for line in lines:
+			if line.split(" ")[0][1:] != url:
+				redirects.write(line)
 
 if issue.user.login == GH_USER and issue.get_labels()[0].name == "update redirects":
 	os.system("git config --local user.email 'action@github.com'")
@@ -52,6 +68,8 @@ if issue.user.login == GH_USER and issue.get_labels()[0].name == "update redirec
 			csv.write(f"{short},{long}")
 			csv.write("\n")
 
+		if NETLIFY: add_netlify_redirects(short, long)
+
 		os.system(f"git commit -m 'Add redirect: {short}' -m '#{os.environ['ISSUE']}' -a")
 		clean_exit("The redirect has been added!")
 
@@ -63,10 +81,13 @@ if issue.user.login == GH_USER and issue.get_labels()[0].name == "update redirec
 			lines = csv.readlines()
 
 		with open("redirects.csv", "w") as csv:
+			# Empty file and write each line again except for the line to remove
 			for line in lines:
 				if line.split(",")[0] != body:
 					csv.write(line)
 				else:
+					# Remove redirect from _redirects too
+					remove_netlify_redirects(body)
 					removed = True
 
 		if removed:
