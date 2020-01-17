@@ -32,10 +32,11 @@ function redirect(data){
 		utm += "&utm_medium=catch-all";
 	}
 
+	// Redirect to the correct URL and add a UTM if config.utm is set to true
 	if(redirectURL.includes("?")){
-		window.location = redirectURL + "&" + utm;
+		window.location = (config.utm) ? redirectURL + "&" + utm : redirectURL;
 	} else {
-		window.location = redirectURL + "?" + utm;
+		window.location = (config.utm) ? redirectURL + "?" + utm : redirectURL;
 	}
 }
 

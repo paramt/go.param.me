@@ -3,5 +3,6 @@ var config = {
 	"defaultRedirect": "https://www.param.me",
 	"repo": "paramt/go.param.me",
 	"user": "paramt",
-	"netlify_redirects": true
+	"netlify_redirects": true,
+	"utm": false
 }
