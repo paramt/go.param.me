@@ -13,7 +13,7 @@ with open("config.js", "r") as js:
 	config = js.read()[13:]
 	config = json.loads(config)
 	SHORT_DOMAIN = config["shortDomain"] # To construct issue comments
-	GH_USER = config["user"] # To filter new issues
+	GH_USERS = config["users"] # To filter new issues
 	NETLIFY = config["netlify_redirects"]
 
 # Get the issue that triggered the script
@@ -42,7 +42,9 @@ def remove_netlify_redirects(url):
 			if line.split(" ")[0][1:] != url:
 				redirects.write(line)
 
-if issue.user.login == GH_USER and issue.get_labels()[0].name == "update redirects":
+authorized = issue.user.login in GH_USERS
+
+if authorized and issue.get_labels()[0].name == "update redirects":
 	os.system("git config --local user.email 'action@github.com'")
 	os.system("git config --local user.name 'GitHub Actions'")
 
