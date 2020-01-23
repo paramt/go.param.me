@@ -14,7 +14,7 @@ with open("config.js", "r") as js:
 	config = json.loads(config)
 	SHORT_DOMAIN = config["shortDomain"] # To construct issue comments
 	GH_USERS = config["users"] # To filter new issues
-	NETLIFY = config["netlify_redirects"]
+	NETLIFY = config["netlify_redirects"] # Whether or not to update the _redirects file
 
 # Get the issue that triggered the script
 github = Github(os.environ["TOKEN"])
@@ -27,11 +27,13 @@ def clean_exit(comment):
 	issue.edit(state="closed")
 	sys.exit()
 
+# Add redirect to _redirects
 def add_netlify_redirects(short, long):
 	with open("_redirects", "a") as redirects:
 		redirects.write(f"/{short} {long}")
 		redirects.write("\n")
 
+# Remove redirect from _redirects
 def remove_netlify_redirects(url):
 	with open("_redirects", "r") as redirects:
 		lines = redirects.readlines()
@@ -42,6 +44,7 @@ def remove_netlify_redirects(url):
 			if line.split(" ")[0][1:] != url:
 				redirects.write(line)
 
+# Check whether issue is opened by an authorized user
 authorized = issue.user.login in GH_USERS
 
 if authorized and issue.get_labels()[0].name == "update redirects":
